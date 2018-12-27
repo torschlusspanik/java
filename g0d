@@ -1,0 +1,107 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package waww2;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author bachtiarsh
+ */
+public class Waww2 {
+    
+    public static int[] desc(int[] arr , int jml){
+         for (int p= 0; p < jml - 1; p++) {
+           for (int i = 0; i < jml - 1; i++) {
+               if (arr[i] < arr[i + 1]) {
+                    int j = arr[i];
+                    arr[i] =arr[i + 1];
+                    arr[i + 1] = j;
+                }
+            }
+       }
+    return arr;
+}
+ 
+    public static int[] asc(int[] arr){
+       int max = 0;
+       int bucket[];
+       
+       for(int i=0;i < arr.length;i++){
+        if (arr[i] > max){
+            max = arr[i];
+        }     
+       }
+       bucket= new int[max + 1];
+       
+       for(int i = 0;i < arr.length;i++){
+           bucket[arr[i]]++;              
+       }
+       for(int i = 0,j = 0; i < bucket.length;i++){
+           for(; bucket[i] > 0; (bucket[i])--){
+               arr[j] = i;
+               j++;
+           }
+       }
+        return arr; 
+    }
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        boolean running = true;
+        while(running){
+        System.out.print("Berapa angka yang akan diurutkan? : ");
+        Scanner input = new Scanner(System.in);
+        int jml = input.nextInt();
+        int[] x = new int[jml];
+        
+        for(int i=1;i<=x.length;i++){
+            System.out.print("Angka ke "+i+": ");
+            x[i-1] = input.nextInt();
+        }
+        System.out.println();
+       System.out.println("Data anda : ");
+       for (int i = 0;i < x.length;i++){
+           System.out.print(x[i]+" ");
+       }
+       x = asc(x);
+       System.out.println();
+       System.out.println("Data anda setelah di bucket sort(ascending) : ");
+       for(int i = 0;i < x.length;i++){
+           System.out.print(x[i]+" ");           
+       }
+       x = desc(x,jml);
+       System.out.println();
+       System.out.println("Data anda setelah di bucket sort(descending) :");
+       for(int i=0;i < x.length;i++){
+           System.out.print(x[i]+" ");
+       }
+       System.out.println();
+       System.out.println();
+           
+       System.out.println("Apakah anda ingin mengurutkan lagi? (Y/T)");
+       String jwb = input.next();
+       if(jwb.equalsIgnoreCase("Y")){
+           running = true;
+        }
+       else if(jwb.equalsIgnoreCase("T")){
+           running = false;
+       }
+       else{
+           System.out.println("ERROR!!!");
+           System.out.println("ERROR!!!");
+           System.out.println("ERROR!!!");
+           running = false;                         
+           }
+              
+         
+        }
+        
+    }
+    
+}
